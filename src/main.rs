@@ -39,5 +39,14 @@ fn swap<T>(x: &mut T, y: &mut T) -> ();
 
 // Rust has several types that represent memory addresses.
 // Rust is as language designed to help keep allocations to a minimum. Values nest by default. The value ((0, 0), (1440, 900)) is stored as four adjacent integers. If we store it in a local variable, we've got a local variable four integers wide. Nothing is allocated in the heap.
-// It's great for memory efficiency, however when Rust needs values to point to other values, it must use pointer types explicitly. Pointer types used in safe Rust are constrained to eliminate undefined behaviour, so pointers are much easier to use correctly in Rust compared to C++.
+// It's great for memory efficiency, however when Rust needs values to point to other values, it must use pointer types explicitly. Pointer types used in safe Rust are constrained to eliminate undefined behaviour, so pointers are much easier to use correctly in Rust compared to C++. We'll go over three pointer types: references, boxes, and unsafe pointers.
 
+// References
+
+// A value of type &String (pronounced "ref String") is a reference to a String value, a &i32 is a reference to an i32, and so on.
+
+// It's easiest to get started by thinking of references as Rust's basic pointer type. A reference can point to any value anywhere, stack or heap. The expression &x produces a reference to x; in Rust terminology, we say that it borrows a reference to x. Given a reference r, the expression *r refers to the value r points to. A reference does not automatically free any resources when it goes out of scope.
+// Rust references are never null. There is no way to produce a null reference in safe Rust, and Rust references are immutable by default:
+&T // Immutable reference
+&mut T // Mutable reference
+// Another major difference is that Rust tracks the ownership and lifetimes of values, so mistakes like dangling pointers, double frees, and pointer invalidation are rules out at compile time.
