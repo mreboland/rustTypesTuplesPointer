@@ -31,3 +31,13 @@ assert_eq!(tail, "in thine eye");
 fn swap<T>(x: &mut T, y: &mut T);
 // The <T> means that swap is generic. We can use it on references to values of any type T. But the signature omits the swap's return type altogether, which is shorthand for returning the unit type:
 fn swap<T>(x: &mut T, y: &mut T) -> ();
+
+// Rust consistently permits an extra trailing comma everywhere commas are used (function arguments, arrays, struct, and enums, etc).
+// There are even tuples that contain a single value. The literal ("lonely hearts",) is a tuple containing a single string, it's type is (&str,). Here, the comma after the value is necessary to distinguish the singleton tuple from a simple parenthetic expression.
+
+// Pointer Types
+
+// Rust has several types that represent memory addresses.
+// Rust is as language designed to help keep allocations to a minimum. Values nest by default. The value ((0, 0), (1440, 900)) is stored as four adjacent integers. If we store it in a local variable, we've got a local variable four integers wide. Nothing is allocated in the heap.
+// It's great for memory efficiency, however when Rust needs values to point to other values, it must use pointer types explicitly. Pointer types used in safe Rust are constrained to eliminate undefined behaviour, so pointers are much easier to use correctly in Rust compared to C++.
+
