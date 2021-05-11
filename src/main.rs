@@ -35,11 +35,13 @@ fn swap<T>(x: &mut T, y: &mut T) -> ();
 // Rust consistently permits an extra trailing comma everywhere commas are used (function arguments, arrays, struct, and enums, etc).
 // There are even tuples that contain a single value. The literal ("lonely hearts",) is a tuple containing a single string, it's type is (&str,). Here, the comma after the value is necessary to distinguish the singleton tuple from a simple parenthetic expression.
 
+
 // Pointer Types
 
 // Rust has several types that represent memory addresses.
 // Rust is as language designed to help keep allocations to a minimum. Values nest by default. The value ((0, 0), (1440, 900)) is stored as four adjacent integers. If we store it in a local variable, we've got a local variable four integers wide. Nothing is allocated in the heap.
 // It's great for memory efficiency, however when Rust needs values to point to other values, it must use pointer types explicitly. Pointer types used in safe Rust are constrained to eliminate undefined behaviour, so pointers are much easier to use correctly in Rust compared to C++. We'll go over three pointer types: references, boxes, and unsafe pointers.
+
 
 // References
 
@@ -50,3 +52,11 @@ fn swap<T>(x: &mut T, y: &mut T) -> ();
 &T // Immutable reference
 &mut T // Mutable reference
 // Another major difference is that Rust tracks the ownership and lifetimes of values, so mistakes like dangling pointers, double frees, and pointer invalidation are rules out at compile time.
+
+
+// Boxes
+
+// The simplest way to allocate a value in the heap is to use Box::new:
+let t = (12, "eggs");
+let b = Box::new(t); // allocate a tuple in the heap
+// The type of t is (i32, &str), so the type of b is Box<(i32, &str)>. Box::new() allocates enough memory to contain the tuple on the heap. When b goes out of scope, the memory is freed immediately, unless b has been moved, by returning it, for example. Moves are essential to the way Rust handles heap-allocated values. Fully explained in chapter 4.
