@@ -60,3 +60,10 @@ fn swap<T>(x: &mut T, y: &mut T) -> ();
 let t = (12, "eggs");
 let b = Box::new(t); // allocate a tuple in the heap
 // The type of t is (i32, &str), so the type of b is Box<(i32, &str)>. Box::new() allocates enough memory to contain the tuple on the heap. When b goes out of scope, the memory is freed immediately, unless b has been moved, by returning it, for example. Moves are essential to the way Rust handles heap-allocated values. Fully explained in chapter 4.
+
+
+// Raw Pointers
+
+// Rust also has the raw pointer types *mut T and *const T. Using a raw pointer is unsafe because Rust makes no effort to track what it points to. For example, raw pointers may be null, or they may point to memory that has been freed or that now contains a value of a different type. All the classic pointer mistakes of C++ are offered for our enjoyment =/
+// However, we may only dereference raw pointers within an unsafe block. An unsafe block is Rust's opt-in mechanism for advanced language features whose safety is up to us. If our code has no unsafe blocks (or if does but are written correctly), then the safety guarantees covered throughout the book hold.
+
